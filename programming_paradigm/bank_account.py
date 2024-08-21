@@ -2,42 +2,31 @@
 
 class BankAccount:
     def __init__(self, initial_balance=0):
-        """
-        Initialize a BankAccount instance with a given initial balance.
-        :param initial_balance: Initial balance of the account (default is 0)
-        """
-        self._account_balance = initial_balance
+        """Initialize the account with an optional initial balance."""
+        self.account_balance = initial_balance
 
     def deposit(self, amount):
-        """
-        Deposit a specified amount into the account.
-        :param amount: The amount to deposit
-        """
+        """Add the specified amount to the account balance."""
         if amount > 0:
-            self._account_balance += amount
-            print(f"Deposited ${amount:.2f}.")
+            self.account_balance += amount
+            print(f"Deposited: ${amount:.2f}")
         else:
-            print("Deposit amount must be positive.")
+            print("Invalid deposit amount.")
 
     def withdraw(self, amount):
-        """
-        Withdraw a specified amount from the account if sufficient funds are available.
-        :param amount: The amount to withdraw
-        :return: True if withdrawal is successful, False otherwise
-        """
-        if amount > 0 and amount <= self._account_balance:
-            self._account_balance -= amount
-            print(f"Withdrew ${amount:.2f}.")
-            return True
-        elif amount > self._account_balance:
-            print("Insufficient funds.")
-            return False
+        """Deduct the specified amount from the account balance if sufficient funds are available."""
+        if amount > 0:
+            if self.account_balance >= amount:
+                self.account_balance -= amount
+                print(f"Withdrew: ${amount:.2f}")
+                return True
+            else:
+                print("Insufficient funds.")
+                return False
         else:
-            print("Withdrawal amount must be positive.")
+            print("Invalid withdrawal amount.")
             return False
 
     def display_balance(self):
-        """
-        Display the current balance of the account.
-        """
-        print(f"Current balance: ${self._account_balance:.2f}")
+        """Display the current balance."""
+        print(f"Current balance: ${self.account_balance:.2f}")
